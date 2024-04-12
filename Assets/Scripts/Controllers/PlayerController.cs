@@ -34,11 +34,10 @@ namespace StarShooter.Controllers
             Move();
         }
 
-
         private void Move()
         {
-            //Vector3 moveDir = new Vector3(dirX)
             transform.Translate(MoveDir);
         }
     }
+
 }
