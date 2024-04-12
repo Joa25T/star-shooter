@@ -263,6 +263,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _initialPos: {x: 0, y: -2, z: 0}
   _speed: 5
+  _playerBounds: 9.37
 --- !u!54 &561602639
 Rigidbody:
   m_ObjectHideFlags: 0
