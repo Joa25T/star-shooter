@@ -15,7 +15,9 @@ namespace StarShooter.Controllers
 
         [Header("Movement")]
         [SerializeField] private float _speed = 5f;
-        [SerializeField] private float _playerBounds = 9.37f;
+        [SerializeField] private float _playerBoundsX = 9.37f;
+        [SerializeField] private float _playerBoundsYMin = -4.5f;
+        [SerializeField] private float _playerBoundsYMax = 0;
 
         //Properties
         //Movement Properties
@@ -25,8 +27,10 @@ namespace StarShooter.Controllers
         private Vector3 MoveDir => new Vector3 (XSpeed,YSpeed,0);
 
         //Warp Properties
-        private float WarpPosX => transform.position.x > 0 ? -_playerBounds : _playerBounds ;
+        private float WarpPosX => transform.position.x > 0 ? -_playerBoundsX : _playerBoundsX ;
         private Vector3 WarpPos => new Vector3 (WarpPosX, transform.position.y, 0);
+        private Vector3 topBoundry => new Vector3 (transform.position.x, _playerBoundsYMax, 0);
+        private Vector3 botBoundry => new Vector3 (transform.position.x, _playerBoundsYMin, 0);
 
         // Start is called before the first frame update
         void Start()
@@ -45,9 +49,17 @@ namespace StarShooter.Controllers
 
         private void WarpPlayer()
         {
-            if (MathF.Abs(transform.position.x) > _playerBounds)
+            if (MathF.Abs(transform.position.x) > _playerBoundsX)
             {
                 transform.position = WarpPos;
+            }
+            if (transform.position.y > _playerBoundsYMax)
+            {
+                transform.position = topBoundry;
+            }
+            else if(transform.position.y < _playerBoundsYMin)
+            {
+                transform.position = botBoundry;
             }
         }
 
