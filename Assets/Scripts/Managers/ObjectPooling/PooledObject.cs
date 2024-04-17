@@ -1,18 +1,19 @@
 using ObjectPooling;
 using UnityEngine;
 
-public class PooledObject : MonoBehaviour, IPoolable
+public class PooledObject : MonoBehaviour
 {
-    //Ipoolable properties
-    public int PoolSize => 15;
+    [SerializeField]protected int _poolSize =20;
+    
+    public int PoolSize => _poolSize;
     public GameObject GameObject => this.gameObject;
 
-    public void ReturnToPool()
+    protected void ReturnToPool()
     {
         PoolManager.Instance.ReturnToPool(this);
     }
 
-    public void Spawn(Vector3 position, Quaternion rotation)
+    protected void Spawn(Vector3 position, Quaternion rotation)
     {
         PoolManager.Instance.Spawn(this, position, rotation);
     }
