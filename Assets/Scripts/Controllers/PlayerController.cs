@@ -3,7 +3,6 @@ using UnityEngine;
 
 namespace StarShooter.Controllers
 {
-    [RequireComponent(typeof(Rigidbody))]
     public class PlayerController : MonoBehaviour
     {
         [Header("Position")]
