@@ -6,6 +6,7 @@ using UnityEngine;
 public class PlayerFire : MonoBehaviour
 {
     [SerializeField] private PooledObject _bullet;
+    [SerializeField] private Transform _firePosition;
 
     private void Update()
     {
