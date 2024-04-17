@@ -9,8 +9,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 9112846369266470430}
-  - component: {fileID: 3407767990496123387}
-  m_Layer: 0
+  - component: {fileID: 3463732967012956839}
+  m_Layer: 11
   m_Name: Laser
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -33,7 +33,7 @@ Transform:
   - {fileID: 572389048670298570}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &3407767990496123387
+--- !u!114 &3463732967012956839
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -42,10 +42,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 5956633641418656326}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 380d10559be57394d8ec46870a63222f, type: 3}
+  m_Script: {fileID: 11500000, guid: 7a2cb919bd9533c45a152916b3428f6d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   _poolSize: 20
+  _speed: 18
+  _lifeSpan: 4.5
 --- !u!1 &7129106907684792392
 GameObject:
   m_ObjectHideFlags: 0
@@ -58,7 +60,7 @@ GameObject:
   - component: {fileID: 19913054586143033}
   - component: {fileID: 6538175728980419011}
   - component: {fileID: 8750756559285920100}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Capsule
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -147,7 +149,7 @@ CapsuleCollider:
   m_LayerOverridePriority: 0
   m_IsTrigger: 0
   m_ProvidesContacts: 0
-  m_Enabled: 0
+  m_Enabled: 1
   serializedVersion: 2
   m_Radius: 0.5
   m_Height: 2
