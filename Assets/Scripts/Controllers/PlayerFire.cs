@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using ObjectPooling;
 using UnityEngine;
 
@@ -12,7 +10,7 @@ public class PlayerFire : MonoBehaviour
     {
         if(Input.GetButtonDown("Fire1"))
         {
-            PoolManager.Instance.Spawn(_bullet, transform.position, Quaternion.identity);
+            PoolManager.Instance.Spawn(_bullet, _firePosition.position, Quaternion.identity);
         }
     }
 }

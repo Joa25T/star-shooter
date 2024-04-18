@@ -16,6 +16,11 @@ namespace ObjectPooling
         // or when an item is destroyed and returns to the pool
         public void AddToPool(PooledObject poolable)
         {
+            //check if the key refrence has been set otherwise assign it
+            if (poolable.KeyRef == null)
+            {
+                poolable.KeyRef = _prefab;
+            }
             Poolables.Enqueue(poolable);
         }
 
@@ -26,4 +31,3 @@ namespace ObjectPooling
         }
     }
 }
-  

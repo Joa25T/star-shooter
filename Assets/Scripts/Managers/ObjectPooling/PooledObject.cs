@@ -7,10 +7,11 @@ public class PooledObject : MonoBehaviour
     
     public int PoolSize => _poolSize;
     public GameObject GameObject => this.gameObject;
+    public PooledObject KeyRef;
 
     protected void ReturnToPool()
     {
-        PoolManager.Instance.ReturnToPool(this);
+        PoolManager.Instance.ReturnToPool(this, KeyRef);
     }
 
     protected void Spawn(Vector3 position, Quaternion rotation)

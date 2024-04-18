@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -20,13 +21,18 @@ namespace ObjectPooling
 
         public PooledObject Spawn(PooledObject prefab, Vector3 position, Quaternion rotation)
         {
+            return Spawn(prefab, position, rotation, prefab);
+        }
+
+        public PooledObject Spawn(PooledObject prefab, Vector3 position, Quaternion rotation, PooledObject keyRef)
+        {
             //check if the ipoolable has already been added to the pool
-            if (!poolDictionary.ContainsKey(prefab))
+            if (!poolDictionary.ContainsKey(keyRef))
             {
                 InitQueue(prefab);
             }
             //if more items are needed than wthe ones created initially add them to the queue
-            if (poolDictionary[prefab].Poolables.Count < 1)
+            if (poolDictionary[keyRef].Poolables.Count < 1)
             {
                 AddToQueue(prefab, 1);
             }
@@ -39,13 +45,15 @@ namespace ObjectPooling
             return itemFetched;
         }
 
-        public void ReturnToPool(PooledObject prefab)
+        public void ReturnToPool(PooledObject prefab, PooledObject keyRef)
         {
-            if (!poolDictionary.ContainsKey(prefab))
+            if (!poolDictionary.ContainsKey(keyRef))
             {
                 Debug.LogError("Trying to return an object outside of pool");
+                //return;
             }
-            poolDictionary[prefab].AddToPool(prefab);
+            poolDictionary[keyRef].AddToPool(prefab);
+            prefab.gameObject.SetActive(false);
         }
 
         //this method is called when we are pooling an object thats not in our queue already

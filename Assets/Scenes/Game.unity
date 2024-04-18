@@ -338,8 +338,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d67668b05a558734ba75789860d48360, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _bullet: {fileID: 3407767990496123387, guid: f13267fa6774e6645bd485118fe2edd2, type: 3}
-  _firePosition: {fileID: 0}
+  _bullet: {fileID: 3463732967012956839, guid: f13267fa6774e6645bd485118fe2edd2, type: 3}
+  _firePosition: {fileID: 129883315}
 --- !u!1 &575544282
 GameObject:
   m_ObjectHideFlags: 0
