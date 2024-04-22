@@ -10,9 +10,9 @@ namespace StarShooter.Controllers
 
         [Header("Movement")]
         [SerializeField] private float _speed = 5f;
-        [SerializeField] private float _playerBoundsX = 9.37f;
-        [SerializeField] private float _playerBoundsYMin = -4.5f;
-        [SerializeField] private float _playerBoundsYMax = 0;
+        [SerializeField] private float _limitsX = 9.37f;
+        [SerializeField] private float _limitYMin = -4.5f;
+        [SerializeField] private float _limitYMax = 0;
 
         //Properties
         //Movement Properties
@@ -24,10 +24,10 @@ namespace StarShooter.Controllers
 
         //Warp Properties
         //Defining the position for the player to warp and top and bottom boundries
-        private float WarpPosX => transform.position.x > 0 ? -_playerBoundsX : _playerBoundsX ;
+        private float WarpPosX => transform.position.x > 0 ? -_limitsX : _limitsX ;
         private Vector3 WarpPos => new Vector3 (WarpPosX, transform.position.y, 0);
-        private Vector3 topBoundry => new Vector3 (transform.position.x, _playerBoundsYMax, 0);
-        private Vector3 botBoundry => new Vector3 (transform.position.x, _playerBoundsYMin, 0);
+        private Vector3 topBoundry => new Vector3 (transform.position.x, _limitYMax, 0);
+        private Vector3 botBoundry => new Vector3 (transform.position.x, _limitYMin, 0);
 
         void Start()
         {
@@ -46,17 +46,17 @@ namespace StarShooter.Controllers
         private void WarpPlayer()
         {
             //warping player
-            if (MathF.Abs(transform.position.x) > _playerBoundsX)
+            if (MathF.Abs(transform.position.x) > _limitsX)
             {
                 transform.position = WarpPos;
             }
             //blocking the player to go further up
-            if (transform.position.y > _playerBoundsYMax)
+            if (transform.position.y > _limitYMax)
             {
                 transform.position = topBoundry;
             }
             //blocking the player to go further down
-            else if(transform.position.y < _playerBoundsYMin)
+            else if(transform.position.y < _limitYMin)
             {
                 transform.position = botBoundry;
             }
