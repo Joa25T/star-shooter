@@ -1,4 +1,3 @@
-using Unity.VisualScripting;
 using UnityEngine;
 
 //serves as parent script for enemies to inherit from
@@ -8,7 +7,6 @@ public class EnemyController : PooledObject, IDamageable
     [SerializeField] protected float _maxHealthPoints = 50;
     protected float _currentHealthPoints;
     [SerializeField] protected Damage _onCollisionDamage = new Damage(10, Damage.DmgType.normal);
-    [SerializeField] protected LayerMask _playerLayer;
 
     [Header("Movement")]
     [SerializeField] protected float _speed = 4f;
@@ -60,9 +58,9 @@ public class EnemyController : PooledObject, IDamageable
         }
     }
 
-    public void OnTriggerEnter(Collider other)
+    protected void OnTriggerEnter(Collider other)
     {
-        if(other.gameObject.layer != _playerLayer) return;
+        if (other.gameObject.layer != LayerMask.NameToLayer("Player")) return;
         if(other.gameObject.TryGetComponent<IDamageable>(out IDamageable damageable))
         {
             damageable.DamageTaken(_onCollisionDamage);
