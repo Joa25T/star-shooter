@@ -215,7 +215,7 @@ Camera:
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 6
+  orthographic size: 5
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -297,7 +297,7 @@ MonoBehaviour:
   _initialPos: {x: 0, y: -2, z: 0}
   _speed: 5
   _limitsX: 9.37
-  _limitYMin: -4.5
+  _limitYMin: -3.5
   _limitYMax: 0
 --- !u!54 &561602639
 Rigidbody:
@@ -324,7 +324,7 @@ Rigidbody:
   m_UseGravity: 0
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 0
+  m_Constraints: 112
   m_CollisionDetection: 0
 --- !u!114 &561602640
 MonoBehaviour:

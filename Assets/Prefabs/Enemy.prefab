@@ -51,9 +51,9 @@ MonoBehaviour:
   _maxHealthPoints: 50
   _speed: 2
   _moveDir: {x: 0, y: -1, z: 0}
-  _spawnPosY: 5.5
+  _spawnPosY: 6
   _spawnLimitX: 9.5
-  _limitYMin: -5.5
+  _limitYMin: -6
 --- !u!65 &3079787821276464398
 BoxCollider:
   m_ObjectHideFlags: 0
