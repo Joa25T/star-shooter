@@ -1,3 +1,4 @@
+using Unity.VisualScripting;
 using UnityEngine;
 
 //serves as parent script for enemies to inherit from
@@ -6,6 +7,8 @@ public class EnemyController : PooledObject, IDamageable
     [Header("Life")]
     [SerializeField] protected float _maxHealthPoints = 50;
     protected float _currentHealthPoints;
+    [SerializeField] protected Damage _onCollisionDamage = new Damage(10, Damage.DmgType.normal);
+    [SerializeField] protected LayerMask _playerLayer;
 
     [Header("Movement")]
     [SerializeField] protected float _speed = 4f;
@@ -13,6 +16,7 @@ public class EnemyController : PooledObject, IDamageable
     [SerializeField] protected float _spawnPosY = 5.5f;
     [SerializeField] protected float _spawnLimitX = 9.5f;
     [SerializeField] protected float _limitYMin = 5.5f;
+
 
     // movement calculating properties
     protected float ActualSpeed => _speed * Time.deltaTime;
@@ -54,6 +58,16 @@ public class EnemyController : PooledObject, IDamageable
         {
             Death();
         }
+    }
+
+    public void OnTriggerEnter(Collider other)
+    {
+        if(other.gameObject.layer != _playerLayer) return;
+        if(other.gameObject.TryGetComponent<IDamageable>(out IDamageable damageable))
+        {
+            damageable.DamageTaken(_onCollisionDamage);
+        }
+        Death();
     }
 
     public void Death()

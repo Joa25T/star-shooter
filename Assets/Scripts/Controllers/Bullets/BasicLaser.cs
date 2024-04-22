@@ -27,8 +27,8 @@ public class BasicLaser : PooledObject
         transform.Translate(Velocity);
     }
 
-    private void OnCollisionEnter(Collision other) 
-    {
+    private void OnTriggerEnter(Collider other)
+    {   
         StopCoroutine(DeactivateAfterLifeSpan());
         if (other.gameObject.TryGetComponent<IDamageable>(out IDamageable objectHit))
         {
