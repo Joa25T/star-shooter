@@ -15,24 +15,22 @@ public class EnemyController : PooledObject, IDamageable
     [SerializeField] protected float _spawnLimitX = 9.5f;
     [SerializeField] protected float _limitYMin = 5.5f;
 
-
     // movement calculating properties
     protected float ActualSpeed => _speed * Time.deltaTime;
     protected Vector3 Velocity => _moveDir * ActualSpeed;
-    protected Vector3 SpawnPosition => new Vector3(Random.Range(-_spawnLimitX, _spawnLimitX), _spawnPosY, 0);
+    protected Vector3 RespawnPosition => new Vector3(Random.Range(-_spawnLimitX, _spawnLimitX), _spawnPosY, 0);
 
     protected virtual void OnEnable()
     {
         //reset the hp of the when its activated
         _currentHealthPoints = _maxHealthPoints;
-
     }
 
     ///overridable move method called every update
     protected virtual void Update()
     {
         Move();
-        if (transform.position.y < _limitYMin)
+        if (transform.position.y < _limitYMin && PlayerHealth.PlayerAlive)
         {
             OnReachedEnd();
         }
@@ -46,7 +44,7 @@ public class EnemyController : PooledObject, IDamageable
     //overridable method called when the enemy has reached the bottom of the screen.
     protected virtual void OnReachedEnd()
     {
-        transform.position = SpawnPosition;
+        transform.position = RespawnPosition;
     }
 
     public void DamageTaken(Damage damage)
@@ -70,8 +68,7 @@ public class EnemyController : PooledObject, IDamageable
 
     public void Death()
     {
-        Destroy(this.gameObject);
-        //ReturnToPool();
+        ReturnToPool();
     }
 
 }

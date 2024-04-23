@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -8,7 +7,7 @@ namespace ObjectPooling
     {
         public static PoolManager Instance;
 
-        private Dictionary<PooledObject, PoolHandler> poolDictionary = new Dictionary<PooledObject, PoolHandler>();
+        private Dictionary<string, PoolHandler> poolDictionary = new Dictionary<string, PoolHandler>();
 
         private void Awake()
         {
@@ -21,13 +20,13 @@ namespace ObjectPooling
 
         public PooledObject Spawn(PooledObject prefab, Vector3 position, Quaternion rotation)
         {
-            return Spawn(prefab, position, rotation, prefab);
+            return Spawn(prefab, position, rotation, prefab.name);
         }
 
-        public PooledObject Spawn(PooledObject prefab, Vector3 position, Quaternion rotation, PooledObject keyRef)
+        public PooledObject Spawn(PooledObject prefab, Vector3 position, Quaternion rotation, string keyRef)
         {
             //check if the ipoolable has already been added to the pool
-            if (!poolDictionary.ContainsKey(keyRef))
+          if (!poolDictionary.ContainsKey(keyRef))
             {
                 InitQueue(prefab);
             }
@@ -37,7 +36,7 @@ namespace ObjectPooling
                 AddToQueue(prefab, 1);
             }
             //get the item from the queue and set it active
-            PooledObject itemFetched = poolDictionary[prefab].GetFromPool();
+            PooledObject itemFetched = poolDictionary[prefab.name].GetFromPool();
             GameObject objectFetched = itemFetched.GameObject;
             objectFetched.SetActive(true);
             objectFetched.transform.position = position;
@@ -45,7 +44,7 @@ namespace ObjectPooling
             return itemFetched;
         }
 
-        public void ReturnToPool(PooledObject prefab, PooledObject keyRef)
+        public void ReturnToPool(PooledObject prefab, string keyRef)
         {
             if (!poolDictionary.ContainsKey(keyRef))
             {
@@ -61,7 +60,7 @@ namespace ObjectPooling
         {
             // we add the prefab we are trying to instantiate to our dictionary
             // generating its handler which keeps created, active and inactive objects
-            poolDictionary.Add(prefab, new PoolHandler(prefab));
+            poolDictionary.Add(prefab.name, new PoolHandler(prefab));
             AddToQueue(prefab, prefab.PoolSize);
         }
 
@@ -72,7 +71,7 @@ namespace ObjectPooling
             {
                 PooledObject createdObj = Instantiate(prefab.GameObject, this.gameObject.transform).GetComponent<PooledObject>();
                 createdObj.gameObject.SetActive(false);
-                poolDictionary[prefab].AddToPool(createdObj);
+                poolDictionary[prefab.name].AddToPool(createdObj);
             }
         }
 

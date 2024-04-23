@@ -7,7 +7,7 @@ public class PooledObject : MonoBehaviour
     
     public int PoolSize => _poolSize;
     public GameObject GameObject => this.gameObject;
-    public PooledObject KeyRef;
+    public string KeyRef;
 
     protected void ReturnToPool()
     {

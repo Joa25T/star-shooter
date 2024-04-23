@@ -10,6 +10,7 @@ namespace ObjectPooling
         {
             _prefab = prefab;
             Poolables = new Queue<PooledObject>();
+
         }
 
         // gets called to populate the queue 
@@ -17,9 +18,9 @@ namespace ObjectPooling
         public void AddToPool(PooledObject poolable)
         {
             //check if the key refrence has been set otherwise assign it
-            if (poolable.KeyRef == null)
+            if (poolable.KeyRef == string.Empty)
             {
-                poolable.KeyRef = _prefab;
+                poolable.KeyRef = _prefab.name;
             }
             Poolables.Enqueue(poolable);
         }
