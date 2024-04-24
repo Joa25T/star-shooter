@@ -26,6 +26,11 @@ public class EnemyController : PooledObject, IDamageable
         _currentHealthPoints = _maxHealthPoints;
     }
 
+    // private void RandomRotate()
+    // {
+    //     transform.rotation =
+    // }
+
     ///overridable move method called every update
     protected virtual void Update()
     {
@@ -56,10 +61,10 @@ public class EnemyController : PooledObject, IDamageable
         }
     }
 
-    protected void OnTriggerEnter(Collider other)
+    protected virtual void OnTriggerEnter2D(Collider2D other)
     {
         if (other.gameObject.layer != LayerMask.NameToLayer("Player")) return;
-        if(other.gameObject.TryGetComponent<IDamageable>(out IDamageable damageable))
+        if (other.transform.parent.TryGetComponent<IDamageable>(out IDamageable damageable))
         {
             damageable.DamageTaken(_onCollisionDamage);
         }
